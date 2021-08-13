@@ -2,6 +2,8 @@ package com.example.HR_Digital;
 
 import com.example.HR_Digital.domain.EmployeeType;
 import com.example.HR_Digital.repo.EmployeeTypeRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class EmployeeTypeController {
     }
 
     @GetMapping("/employeeType")
-    public List<EmployeeType> findAll(){
-        return repo.findAll();
+    public Page<EmployeeType> findAll(Pageable pageable){
+        return repo.findAll(pageable);
     }
 }
