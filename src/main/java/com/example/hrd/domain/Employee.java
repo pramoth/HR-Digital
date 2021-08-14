@@ -1,5 +1,7 @@
 package com.example.hrd.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,8 +21,8 @@ public class Employee {
     private LocalDateTime startWork;
     private String username;
     private String password;
-    //private Integer id; //idDepartment
-    //private Integer id; //idemployeeType
+
+    @JsonManagedReference
     @ManyToOne
     private Department department;
 

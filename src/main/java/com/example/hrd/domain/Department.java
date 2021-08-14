@@ -1,5 +1,7 @@
 package com.example.hrd.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Department {
     @Id
     private Integer id;
     //NAME
-    @Column(name="NAME")
+    @Column(name = "NAME")
     private String name;
 
     //COMPANY_ID
@@ -19,6 +21,7 @@ public class Department {
     @ManyToOne
     private Company company;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
