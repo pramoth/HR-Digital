@@ -1,12 +1,12 @@
 package com.example.hrd.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.File;
 import java.time.LocalDateTime;
 
 @Entity
 public class Leave {
+    public enum LeaveType {VACATION,SICK}
     @Id
     private Integer id;
     private String reasonLeave;
@@ -18,10 +18,12 @@ public class Leave {
     private float totalDateLeave;
     private File fileLeave;
     private String statusLeave;
-    /*FK
-    private Integer id; //id_employee
-    private Integer id; //id_leave_type
-    */
+    @Enumerated(EnumType.STRING)
+    private LeaveType leaveType;
+
+    //employee_id
+    @ManyToOne
+    private Employee employee;
 
     public Integer getId() {
         return id;

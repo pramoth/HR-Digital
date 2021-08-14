@@ -1,13 +1,26 @@
 package com.example.hrd.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
+//DEPARTMENT
+// ID,NAME,COMPANY_ID
 @Entity
 public class Department {
+    //ID
     @Id
     private Integer id;
+    //NAME
+    @Column(name="NAME")
     private String name;
+
+    //COMPANY_ID
+    @JoinColumn(name = "COMPANY_ID")
+    @ManyToOne
+    private Company company;
+
+    @OneToMany(mappedBy = "department")
+    private List<Employee> employees;
 
     public Integer getId() {
         return id;

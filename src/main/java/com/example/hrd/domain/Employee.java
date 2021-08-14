@@ -1,11 +1,12 @@
 package com.example.hrd.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Employee {
+    public enum Position{STAFF,HEAD}
     @Id private Integer id;
     private String firstName;
     private String lastName;
@@ -13,11 +14,21 @@ public class Employee {
     private LocalDateTime dateBorn;
     private String address;
     private String tel;
-    private String position;
+    @Enumerated(EnumType.STRING)
+    private Position position;
     private LocalDateTime startWork;
+    private String username;
+    private String password;
     //private Integer id; //idDepartment
     //private Integer id; //idemployeeType
+    @ManyToOne
+    private Department department;
 
+    @OneToMany(mappedBy = "employee")
+    private List<Leave> leaves;
+
+    @OneToMany(mappedBy = "employee")
+    private List<TimeWork> timeWorks;
 
     public Integer getId() {
         return id;
@@ -68,10 +79,10 @@ public class Employee {
         this.tel = tel;
     }
 
-    public String getPosition() {
+    public Position getPosition() {
         return position;
     }
-    public void setPosition(String position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 
